@@ -1,12 +1,14 @@
 package com.eric.shopmall.model;
 
+import com.eric.shopmall.constant.ProductCategory;
+
 import java.util.Date;
 
 public class Product {
 
     private Integer product_Id;
     private String product_Name;
-    private String category;
+    private ProductCategory category;
     private String image_url;
     private Integer price;
     private Integer stock;
@@ -31,11 +33,11 @@ public class Product {
         this.product_Name = product_Name;
     }
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
