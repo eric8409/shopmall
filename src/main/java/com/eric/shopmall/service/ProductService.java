@@ -1,10 +1,13 @@
 package com.eric.shopmall.service;
 
+import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
 
 public interface ProductService {
 
     Product getProductById(Integer product_Id);
+
+    Integer createProduct(ProductRequest productRequest);
 
 
 

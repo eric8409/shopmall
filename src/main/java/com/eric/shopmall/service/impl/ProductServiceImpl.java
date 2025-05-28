@@ -1,6 +1,7 @@
 package com.eric.shopmall.service.impl;
 
 import com.eric.shopmall.dao.ProductDao;
+import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
 import com.eric.shopmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,11 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Integer product_Id) {
 
         return productDao.getProductById(product_Id);
+    }
+
+    @Override
+    public Integer createProduct(ProductRequest productRequest) {
+
+        return productDao.createProduct(productRequest);
     }
 }
