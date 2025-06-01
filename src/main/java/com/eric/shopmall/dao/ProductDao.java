@@ -3,7 +3,11 @@ package com.eric.shopmall.dao;
 import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
 
+import java.util.List;
+
 public interface ProductDao {
+
+    List<Product> getProducts();
 
     Product getProductById(Integer product_Id);
 
