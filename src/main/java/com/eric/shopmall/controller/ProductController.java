@@ -1,6 +1,7 @@
 package com.eric.shopmall.controller;
 
 import com.eric.shopmall.constant.ProductCategory;
+import com.eric.shopmall.dto.ProductQueryParams;
 import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
 import com.eric.shopmall.service.ProductService;
@@ -24,8 +25,11 @@ public class ProductController {
           @RequestParam(required = false) ProductCategory category,
           @RequestParam(required = false) String search) {
 
+         ProductQueryParams productQueryParams = new ProductQueryParams();
+         productQueryParams.setCategory(category);
+         productQueryParams.setSearch(search);
 
-        List<Product> productList = productService.getProducts(category, search);
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return  ResponseEntity.status(HttpStatus.OK).body(productList);
 
