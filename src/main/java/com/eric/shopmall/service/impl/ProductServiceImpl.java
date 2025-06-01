@@ -1,5 +1,6 @@
 package com.eric.shopmall.service.impl;
 
+import com.eric.shopmall.constant.ProductCategory;
 import com.eric.shopmall.dao.ProductDao;
 import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
@@ -16,9 +17,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category, String search) {
 
-       return productDao.getProducts();
+       return productDao.getProducts(category, search);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.eric.shopmall.controller;
 
+import com.eric.shopmall.constant.ProductCategory;
 import com.eric.shopmall.dto.ProductRequest;
 import com.eric.shopmall.model.Product;
 import com.eric.shopmall.service.ProductService;
@@ -19,10 +20,12 @@ public class ProductController {
 
 
   @GetMapping("/products")
-  public ResponseEntity<List<Product>> getProducts() {
+  public ResponseEntity<List<Product>> getProducts(
+          @RequestParam(required = false) ProductCategory category,
+          @RequestParam(required = false) String search) {
 
 
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = productService.getProducts(category, search);
 
         return  ResponseEntity.status(HttpStatus.OK).body(productList);
 
