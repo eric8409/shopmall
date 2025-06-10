@@ -1,5 +1,6 @@
 package com.eric.shopmall.controller;
 
+import com.eric.shopmall.dto.UserLoginRequest;
 import com.eric.shopmall.dto.UserRegisterRequest;
 import com.eric.shopmall.model.Product;
 import com.eric.shopmall.model.User;
@@ -29,7 +30,19 @@ public class UserController {
      return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
+    @PostMapping("/users/login")
+    public  ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
 
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+
+
+
+
+
+
+    }
 
 
 
