@@ -88,4 +88,7 @@ public class Product {
     public void setLast_modified_date(Date last_modified_date) {
         this.last_modified_date = last_modified_date;
     }
+
+
+
 }
