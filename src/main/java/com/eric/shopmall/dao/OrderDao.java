@@ -1,11 +1,16 @@
 package com.eric.shopmall.dao;
 
+import com.eric.shopmall.dto.OrderQueryParams;
 import com.eric.shopmall.model.Order;
 import com.eric.shopmall.model.OrderItem;
 
 import java.util.List;
 
 public interface OrderDao {
+
+     Integer countOrder(OrderQueryParams orderQueryParams);
+
+     List<Order> getOrders(OrderQueryParams orderQueryParams);
 
      Order getOrderById(Integer orderId);
 

@@ -5,6 +5,7 @@ import com.eric.shopmall.dao.ProductDao;
 import com.eric.shopmall.dao.UserDao;
 import com.eric.shopmall.dto.BuyItem;
 import com.eric.shopmall.dto.CreateOrderRequest;
+import com.eric.shopmall.dto.OrderQueryParams;
 import com.eric.shopmall.model.Order;
 import com.eric.shopmall.model.OrderItem;
 import com.eric.shopmall.model.Product;
@@ -34,6 +35,25 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserDao userDao;
 
+    @Override
+    public Integer countOrder(OrderQueryParams orderQueryParams) {
+
+        return orderDao.countOrder(orderQueryParams);
+    }
+
+    @Override
+    public List<Order> getOrders(OrderQueryParams orderQueryParams) {
+
+        List<Order> orderList = orderDao.getOrders(orderQueryParams);
+
+        for(Order order: orderList) {
+            List<OrderItem> OrderItemList = orderDao.getOrderItemsById(order.getOrder_id());
+
+            order.setOrderItemList(OrderItemList);
+        }
+            return orderList;
+
+    }
 
     @Override
     public Order getOrderById(Integer orderId) {
