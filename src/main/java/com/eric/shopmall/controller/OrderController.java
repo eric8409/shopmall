@@ -1,11 +1,8 @@
 package com.eric.shopmall.controller;
 
-import com.eric.shopmall.constant.ProductCategory;
 import com.eric.shopmall.dto.CreateOrderRequest;
 import com.eric.shopmall.dto.OrderQueryParams;
-import com.eric.shopmall.dto.ProductQueryParams;
 import com.eric.shopmall.model.Order;
-import com.eric.shopmall.model.Product;
 import com.eric.shopmall.service.OrderService;
 import com.eric.shopmall.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<Page<Order>> getOrders(
 
@@ -57,17 +54,33 @@ public class OrderController {
 
     }
 
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest) {
 
 
-         Integer orderId = orderService.createOrder(userId, createOrderRequest);
+        Integer orderId = orderService.createOrder(userId, createOrderRequest);
 
-         Order order = orderService.getOrderById(orderId);
+        Order order = orderService.getOrderById(orderId);
 
-         return ResponseEntity.status(HttpStatus.CREATED).body(order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
