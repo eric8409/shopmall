@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>shopmall</name>
 	<description>shopmall</description>
-	<packaging>jar</packaging>
 	<url/>
 	<licenses>
 		<license/>

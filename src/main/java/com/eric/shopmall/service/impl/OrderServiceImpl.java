@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 
             order.setOrderItemList(OrderItemList);
         }
-        return orderList;
+            return orderList;
 
     }
 
@@ -59,13 +59,13 @@ public class OrderServiceImpl implements OrderService {
     public Order getOrderById(Integer orderId) {
 
 
-        Order order = orderDao.getOrderById(orderId);
+      Order order = orderDao.getOrderById(orderId);
 
-        List<OrderItem> orderItemList  = orderDao.getOrderItemsById(orderId);
+      List<OrderItem> orderItemList  = orderDao.getOrderItemsById(orderId);
 
-        order.setOrderItemList(orderItemList);
+      order.setOrderItemList(orderItemList);
 
-        return order;
+      return order;
 
     }
 
@@ -87,49 +87,49 @@ public class OrderServiceImpl implements OrderService {
         int totalAmount = 0;
         List<OrderItem> orderItemList = new ArrayList<>();
 
-        for(BuyItem buyItem : createOrderRequest.getBuyItemList()) {
-            Product product = productDao.getProductById(buyItem.getProductId());
+       for(BuyItem buyItem : createOrderRequest.getBuyItemList()) {
+           Product product = productDao.getProductById(buyItem.getProductId());
 
 
-            //檢查 product 是否存在、庫存是否足夠
-            if(product == null) {
+           //檢查 product 是否存在、庫存是否足夠
+           if(product == null) {
 
-                log.warn("商品 {} 不存在", buyItem.getProductId());
-                throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
+               log.warn("商品 {} 不存在", buyItem.getProductId());
+               throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
-            } else if (product.getStock() < buyItem.getQuantity()) {
+           } else if (product.getStock() < buyItem.getQuantity()) {
 
-                log.warn("商品 {} 庫存數量不足，無法購買。剩餘庫存 {} ，欲購買數量 {}", buyItem.getProductId(), product.getStock(), buyItem.getQuantity());
-                throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
-            }
+               log.warn("商品 {} 庫存數量不足，無法購買。剩餘庫存 {} ，欲購買數量 {}", buyItem.getProductId(), product.getStock(), buyItem.getQuantity());
+               throw  new ResponseStatusException(HttpStatus.BAD_REQUEST);
+           }
 
-            //扣除商品庫存
-            productDao.updateStock(product.getProduct_Id(), product.getStock() - buyItem.getQuantity());
-
-
+           //扣除商品庫存
+           productDao.updateStock(product.getProduct_Id(), product.getStock() - buyItem.getQuantity());
 
 
-            //計算總價錢
-            int amount = buyItem.getQuantity() * product.getPrice();
-            totalAmount = totalAmount + amount;
 
 
-            //BuyItem 轉換 OrderItem
+           //計算總價錢
+           int amount = buyItem.getQuantity() * product.getPrice();
+           totalAmount = totalAmount + amount;
 
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProduct_id(buyItem.getProductId());
-            orderItem.setQuantity(buyItem.getQuantity());
-            orderItem.setAmount(amount);
 
-            orderItemList.add(orderItem);
+           //BuyItem 轉換 OrderItem
 
-        }
+           OrderItem orderItem = new OrderItem();
+           orderItem.setProduct_id(buyItem.getProductId());
+           orderItem.setQuantity(buyItem.getQuantity());
+           orderItem.setAmount(amount);
+
+           orderItemList.add(orderItem);
+
+       }
 
 
         //創建訂單
         Integer  orderId = orderDao.createOrder(userId, totalAmount);
 
-        orderDao.createOrderItems(orderId, orderItemList);
+         orderDao.createOrderItems(orderId, orderItemList);
 
         return orderId;
 

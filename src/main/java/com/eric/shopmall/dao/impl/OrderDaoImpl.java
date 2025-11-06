@@ -45,7 +45,7 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getOrders(OrderQueryParams orderQueryParams) {
 
         String sql =  "SELECT order_id, user_id, total_amount, created_date, last_modified_date " +
-                "FROM `order` WHERE 1=1";
+                      "FROM `order` WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
@@ -71,7 +71,7 @@ public class OrderDaoImpl implements OrderDao {
     public Order getOrderById(Integer orderId) {
 
         String sql =  "SELECT order_id, user_id, total_amount, created_date, last_modified_date " +
-                "FROM `order` WHERE order_id = :orderId";
+                      "FROM `order` WHERE order_id = :orderId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("orderId", orderId);

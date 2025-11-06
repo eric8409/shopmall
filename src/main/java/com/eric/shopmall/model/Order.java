@@ -62,4 +62,3 @@ public class Order {
         this.orderItemList = orderItemList;
     }
 }
-
